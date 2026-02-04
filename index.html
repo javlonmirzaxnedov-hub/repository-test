@@ -1270,5 +1270,98 @@
     document
       .getElementById("btn-commit3")
       .addEventListener("click", () => showCommit(3));
+
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById(
+      "mobile-menu-button"
+    );
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    mobileMenuButton.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    // Close mobile menu when clicking on a link
+    const mobileLinks = mobileMenu.querySelectorAll("a");
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+      });
+    });
+
+    // Back to Top Button
+    const backToTopButton = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.remove("opacity-0", "invisible");
+        backToTopButton.classList.add("opacity-100", "visible");
+      } else {
+        backToTopButton.classList.remove("opacity-100", "visible");
+        backToTopButton.classList.add("opacity-0", "invisible");
+      }
+    });
+
+    backToTopButton.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Form Submission and Modal Logic
+    const joinForm = document.getElementById("joinForm");
+    const contactForm = document.getElementById("contactForm");
+    const successModal = document.getElementById("successModal");
+    const closeModal = document.getElementById("closeModal");
+    const modalCloseButton = document.getElementById(
+      "modalCloseButton"
+    );
+
+    function showModal() {
+      successModal.classList.remove("opacity-0", "invisible");
+      successModal.classList.add("opacity-100", "visible");
+    }
+
+    function hideModal() {
+      successModal.classList.remove("opacity-100", "visible");
+      successModal.classList.add("opacity-0", "invisible");
+    }
+
+    if (joinForm) {
+      joinForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        showModal();
+        joinForm.reset();
+      });
+    }
+
+    if (contactForm) {
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        showModal();
+        contactForm.reset();
+      });
+    }
+
+    closeModal.addEventListener("click", hideModal);
+    modalCloseButton.addEventListener("click", hideModal);
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute("href");
+        if (targetId === "#") return;
+
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: "smooth",
+          });
+        }
+      });
+    });
+  });
+</script>
 </body>
 </html>
